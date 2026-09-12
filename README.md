@@ -72,6 +72,23 @@ one thing on it publishing them.
 
 ## Setting it up
 
+**All of this is DONE as of 12 September 2026** and the site is live and serving over HTTPS.
+The steps are kept because they are how it gets rebuilt, and because step 3 is the one that
+is invisible from inside this repository.
+
+What was actually done, in this order: the two Namecheap parking records were deleted (a
+`CNAME www → parkingpage.namecheap.com` and a `URL Redirect @ → http://www.mutabloom.com/`),
+the nine records in the table below were added, Pages was enabled on `main` at the root, and
+`https_enforced` was set once GitHub's certificate reached `approved` — which took about a
+minute here, not the twenty-four hours the checkbox warns about.
+
+**Namecheap's email-forwarding SPF record was deliberately left alone.** It is
+`TXT @ v=spf1 include:spf.efwd.registrar-servers.com ~all`, it is not GitHub's business, and
+nothing here asked for it to be deleted. Namecheap's API has no "add one record" call —
+`setHosts` replaces every host record on the domain — so anything that ever automates this
+must read, merge and write, not send nine records and hope. `cratergut-website/scripts/dns.py`
+already does exactly that and is the thing to copy.
+
 1. **Settings → Pages** in this repository: source `Deploy from a branch`, branch `main`,
    folder `/ (root)`.
 2. **Settings → Pages → Custom domain**: `mutabloom.com`. GitHub writes a `CNAME` file; one is
