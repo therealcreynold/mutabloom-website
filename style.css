@@ -1,0 +1,223 @@
+/* Mutabloom — the whole site's styles.
+
+   Every page links this file, including the landing page. That is a deliberate difference
+   from the older sites here, where the landing page kept its styles inline and the palette
+   was therefore written down twice; the second copy drifted the first time a colour changed.
+   One file, one palette, four pages.
+
+   The direction comes from MUTABLOOM_PLAN.md sections 5.2 and 5.4, so the site reads as the
+   same object as the game: soft rounded low-poly shapes, hand-painted gradient light, pastel
+   meadow greens, and one warm rim light doing the accenting. SF Rounded for display and SF
+   Pro for body, both through system stacks -- no web font is loaded, so nothing here can be
+   slow, blocked, or a third party watching who read the privacy policy.
+
+   No JavaScript anywhere on this site. There is nothing here that needs any. */
+
+/* ---- Palette ----------------------------------------------------------------------
+   Light is the default and is defined in full on bare :root, so a browser that reports no
+   preference still gets a complete set of colours rather than half of one. Dark mode
+   redefines the same tokens and nothing else. */
+
+:root {
+  --meadow-top:   #F6FBF1;
+  --meadow-bot:   #E4F1D8;
+  --card:         rgba(255,255,255,.72);
+  --card-line:    rgba(47,107,68,.14);
+  --ink:          #1D3326;
+  --ink-soft:     #4A6553;
+  --stem:         #2F6B44;   /* headings and links */
+  --leaf:         #4C8C5A;
+  --rim:          #C2701C;   /* the warm rim light, at a weight that reads on pale ground */
+  --rim-glow:     #F7B25E;   /* the same light where it is a wash rather than text */
+  --bloom:        #7B4FB5;   /* mutation accent; used sparingly, always beside a word */
+  --shadow:       0 10px 30px rgba(31,74,45,.10);
+
+  /* So scrollbars, form controls and the overscroll gutter follow the page rather than
+     sitting there in the opposite theme. */
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --meadow-top: #101A13;
+    --meadow-bot: #16241A;
+    --card:       rgba(255,255,255,.055);
+    --card-line:  rgba(160,214,172,.16);
+    --ink:        #E7F2E4;
+    --ink-soft:   #A8C0AE;
+    --stem:       #8FD39B;
+    --leaf:       #A5DFAE;
+    --rim:        #FFC27A;
+    --rim-glow:   #FFC27A;
+    --bloom:      #CBA6F7;
+    --shadow:     0 10px 30px rgba(0,0,0,.34);
+  }
+}
+
+/* ---- Furniture --------------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: 17px/1.65 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+        system-ui, sans-serif;
+  color: var(--ink);
+  /* A long address in running text must not be able to push a phone into sideways
+     scrolling. Nothing on this site is wide enough to need a scroller of its own. */
+  overflow-wrap: break-word;
+  background:
+    radial-gradient(120% 70% at 12% -8%, rgba(247,178,94,.20), transparent 62%),
+    radial-gradient(90% 55% at 92% 4%, rgba(123,79,181,.10), transparent 60%),
+    linear-gradient(178deg, var(--meadow-top), var(--meadow-bot) 62%, var(--meadow-top));
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* SF Rounded, which is what the game's display type is, reached through ui-rounded. Every
+   fallback after it is a real family somewhere; the last resort is the platform default. */
+h1, h2, h3, .brand, .pill, .step {
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               system-ui, sans-serif;
+  letter-spacing: -.015em;
+}
+
+a { color: var(--stem); text-decoration-thickness: .07em; text-underline-offset: .18em; }
+a:hover { color: var(--rim); }
+
+/* One gutter rule for the whole site. Side padding lives here and nowhere else, so no page
+   can lose it and butt its text against the edge of a phone. */
+.wrap { width: 100%; max-width: 880px; margin: 0 auto; padding-inline: 22px; }
+.wrap.narrow { max-width: 720px; }
+
+/* ---- The bar ----------------------------------------------------------------------- */
+
+.bar {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--card-line);
+  background: var(--card);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+}
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline;
+             justify-content: space-between; }
+.brand { font-size: 20px; font-weight: 800; color: var(--stem); text-decoration: none; }
+.brand span { color: var(--rim); }
+.bar nav a { margin-left: 16px; font-size: 15px; }
+.bar nav a:first-child { margin-left: 0; }
+
+/* ---- Hero -------------------------------------------------------------------------- */
+
+.hero { padding-block: clamp(56px, 12vw, 104px) clamp(40px, 8vw, 72px); text-align: center; }
+.hero h1 {
+  margin: 0;
+  font-size: clamp(46px, 13vw, 92px);
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -.035em;
+  color: var(--stem);
+}
+.hero h1 span { color: var(--rim); }
+.tag { margin: 14px auto 0; font-size: clamp(19px, 4.4vw, 25px); color: var(--ink); font-weight: 600; }
+.lede { margin: 18px auto 0; max-width: 42ch; font-size: clamp(17px, 3.4vw, 19px); color: var(--ink-soft); }
+
+.pill {
+  display: inline-block; margin-top: 28px; padding: 11px 22px;
+  border: 1px solid var(--card-line); border-radius: 999px;
+  background: var(--card); box-shadow: var(--shadow);
+  font-size: 15px; font-weight: 700; color: var(--rim);
+}
+.hero .note { margin: 16px auto 0; max-width: 46ch; font-size: 15px; color: var(--ink-soft); }
+
+/* ---- Sections and cards ------------------------------------------------------------ */
+
+section { padding-block: clamp(38px, 7vw, 60px); }
+section + section, .hero + section { border-top: 1px solid var(--card-line); }
+h2 { margin: 0 0 6px; font-size: clamp(24px, 5vw, 31px); font-weight: 800; color: var(--stem); }
+.sub { margin: 0 0 26px; color: var(--ink-soft); max-width: 56ch; }
+
+.cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card {
+  padding: 22px 22px 24px;
+  border: 1px solid var(--card-line);
+  /* Concentric-ish: the inner radius of the game's panels, kept generous so the corners
+     read as soft rather than merely not-square. */
+  border-radius: 24px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.card:hover { transform: translateY(-3px); }
+.card h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; color: var(--leaf); }
+.card p  { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+.card p + p { margin-top: 10px; }
+.card .mut { color: var(--bloom); font-weight: 700; }
+
+/* The core loop. An ordered list that reads as a row of chips on a wide screen and a plain
+   stack on a phone, because a phone has no room for the arrow and the arrow is decoration. */
+.loop { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; padding: 0; list-style: none;
+        counter-reset: step; }
+.step {
+  padding: 9px 16px; border: 1px solid var(--card-line); border-radius: 999px;
+  background: var(--card); font-size: 15px; font-weight: 600; box-shadow: var(--shadow);
+}
+.step.hit { color: var(--rim); border-color: color-mix(in srgb, var(--rim) 40%, transparent); }
+
+.poses { margin: 0; padding: 0; list-style: none; }
+.poses li { padding: 14px 0; border-top: 1px solid var(--card-line); font-size: 16px; }
+.poses li:first-child { border-top: 0; }
+.poses b { color: var(--leaf); font-weight: 700; }
+
+/* ---- Long-form pages (privacy, terms, support) -------------------------------------- */
+
+main.doc { padding-block: 40px 12px; }
+main.doc h1 { margin: 0 0 6px; font-size: clamp(30px, 6.4vw, 42px); font-weight: 800;
+              letter-spacing: -.03em; color: var(--stem); }
+main.doc .updated { margin: 0 0 26px; font-size: 15px; color: var(--ink-soft); }
+main.doc h2 { margin: 38px 0 10px; font-size: 22px; }
+main.doc h3 { margin: 26px 0 6px; font-size: 17.5px; color: var(--leaf); }
+main.doc p, main.doc li { color: var(--ink-soft); }
+main.doc strong { color: var(--ink); }
+main.doc ul { padding-left: 20px; }
+main.doc li { margin-bottom: 9px; }
+main.doc .callout {
+  margin: 22px 0; padding: 18px 20px; border: 1px solid var(--card-line); border-radius: 20px;
+  background: var(--card); box-shadow: var(--shadow);
+}
+main.doc .callout p { margin: 0; color: var(--ink); }
+main.doc .callout p + p { margin-top: 10px; }
+
+/* ---- Footer ------------------------------------------------------------------------ */
+
+footer {
+  margin-top: 46px; padding-block: 30px 60px;
+  border-top: 1px solid var(--card-line);
+  font-size: 14.5px; color: var(--ink-soft); text-align: center;
+}
+footer nav a { margin: 0 10px; display: inline-block; }
+footer p { margin: 14px 0 0; }
+
+/* ---- Narrow screens ----------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .wrap { padding-inline: 18px; }
+  .card { padding: 18px; border-radius: 20px; }
+}
+
+/* ---- Reduced motion ------------------------------------------------------------------
+   The game honours Reduce Motion in its camera, its reveal sequence and its idle animation
+   (plan section 5.4). A marketing site that ignored the same switch would be saying the
+   opposite of what it is selling. */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card:hover { transform: none; }
+}

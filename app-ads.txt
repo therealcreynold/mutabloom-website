@@ -1,0 +1,35 @@
+# app-ads.txt for mutabloom.com
+#
+# Advertising networks crawl this file to confirm that whoever is selling advertising inside
+# Mutabloom is actually allowed to. Without a verified file the better-paying programmatic
+# demand does not bid, and an unverified file now means limited serving rather than merely
+# lower prices, so this is a launch blocker rather than an optimisation. It is also the single
+# biggest lever on launch-week revenue that is not code.
+#
+# THIS FILE IS DELIBERATELY INCOMPLETE, AND THAT IS THE CORRECT STATE FOR IT TODAY.
+#
+# The only line here is OWNERDOMAIN. There is no seller line yet because there is no AdMob
+# app yet: Mutabloom has not been created in AdMob, so no publisher ID exists to authorise.
+#
+# THE GOOGLE LINE IS PASTED BY A HUMAN, FROM THE ADMOB DASHBOARD, ONCE THE ADMOB APP EXISTS.
+# AdMob generates it in its own "How to set up app-ads.txt" dialog. Copy it from there and
+# paste it below this comment block. Do not type it, do not adapt one from another property,
+# and do not guess the publisher ID: a wrong DIRECT line authorises a seller that is not used,
+# which is worse than a missing one, because it looks verified and is not, and it is a
+# supply-chain claim that is untrue.
+#
+# The same rule holds for every other network. Add a line only when that network is genuinely
+# enabled in the shipping build. Mutabloom v1 runs on Google AdMob alone with no mediation
+# (MUTABLOOM_PLAN.md section 11: "AdMob bidding only at first; mediation partners after
+# ~1k DAU"), so when mediation does arrive, each partner's lines get pasted from that
+# partner's own dashboard at the point the partner is switched on -- not in advance.
+#
+# Serving requirements, which are not negotiable: root of the domain set as the App Store
+# Connect Marketing URL, text/plain, HTTP 200, no redirect to anywhere else. The crawl walks
+# from the store listing to the domain, so it cannot even begin until both the listing and
+# this site are live. Allow about 24 hours after that.
+
+# The IAB variable naming the business that owns this inventory. It has to be the domain set
+# as the App Store Connect Marketing URL, because that link is the path every crawler walks
+# to get here. For Mutabloom that is the apex, https://mutabloom.com -- not a sub-path.
+OWNERDOMAIN=mutabloom.com

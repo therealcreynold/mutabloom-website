@@ -1,0 +1,38 @@
+# What GitHub Pages is allowed to publish.
+#
+# This file exists to stop the site publishing things that are not the site. GitHub Pages
+# deploys every file in a repository by default, so a README, a note to self, a scratch file
+# or a word list committed here is a public page the moment it is pushed. That has bitten
+# this owner before, on another property, in the worst possible way: a checked-in list of
+# terms that a lint script was written to keep OFF the public site was itself served as
+# prose, HTTP 200, text/plain, on the domain the App Store listing pointed at.
+#
+# `.nojekyll` is not the answer and cannot be. It is a reasonable default for a site with no
+# build step -- serve the files exactly as they are -- but with Jekyll off there is no ignore
+# list at all, so there is no way to keep a file in the repository and out of the public
+# directory. Dotfiles are not a way round it either; only `.git` is special-cased by GitHub.
+#
+# So Jekyll is on and told to publish nothing but the site. That is safe for these particular
+# files: Jekyll renders only files carrying YAML front matter, and every page here begins
+# with `<!doctype html>` with no front matter, so all of them are copied byte for byte. There
+# is no `{`+`{` or `{`+`%` anywhere in the site either, which was checked before this was
+# committed and is worth re-checking after any page is edited.
+#
+# `scripts` is excluded pre-emptively. There is no scripts directory in this repository yet,
+# and the exclusion is here so that the day one is added -- a link checker, a legal lint, a
+# DNS helper -- it is already private rather than already public. Excluding a directory that
+# does not exist costs nothing; adding the directory first and the exclusion afterwards is
+# exactly how the incident above happened.
+#
+# ANYTHING ADDED TO THIS REPOSITORY IS PUBLIC THE MOMENT IT IS PUSHED UNLESS IT IS NAMED
+# HERE. Add it here first. And after any change to this file, re-check every URL listed in
+# README.md under "Checking it actually works": an excluded page and a broken page look
+# identical from a terminal, and three of those URLs are compiled into the shipping app.
+exclude:
+  - scripts
+  - README.md
+
+# Nothing else. No theme, no plugin, no layout, no collection. Every page is hand-written
+# HTML and is meant to stay that way, because two of them are documents Apple and Google hold
+# the owner to, and a templating layer between the words and the reader is a way to be
+# surprised by your own privacy policy.

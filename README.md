@@ -1,0 +1,186 @@
+# mutabloom.com
+
+The website for Mutabloom, served by GitHub Pages. Four pages, one stylesheet, no build step,
+no framework and no JavaScript: everything here is the file that gets served.
+
+This is also the **only** copy. It deliberately does not live inside the game repository under
+`site/`, because the two would have drifted the first time either was edited — which matters
+more than usual here, because three of these URLs are compiled into the app binary and two of
+these files are documents Apple and Google hold you to.
+
+| Path | Why it exists |
+|---|---|
+| `index.html` | Landing page. Also the App Store Connect **Marketing URL**, which is the path ad-network crawlers walk to reach `app-ads.txt` |
+| `privacy/index.html` | App Store Connect **Privacy Policy URL**. Required before the app can be submitted, and required by the ad network before it will serve |
+| `support/index.html` | App Store Connect **Support URL**. Also required at submission |
+| `terms/index.html` | Linked from the game's Settings screen. Goes into no App Store Connect field |
+| `404.html` | Served by GitHub Pages for anything else |
+| `app-ads.txt` | Must sit at the domain root, as `text/plain`. Currently holds `OWNERDOMAIN` and nothing else, on purpose — see below |
+| `style.css` | Every page's styles, matching the game's art direction (plan §5.2, §5.4) |
+| `CNAME` | The custom domain, for GitHub Pages |
+| `_config.yml` | The list of things this repository is **not** allowed to publish |
+
+## Why the pages are directories
+
+`privacy/index.html` rather than `privacy.html`, because the game links to
+`https://mutabloom.com/privacy` with no extension and that string is compiled into the binary.
+A directory with an `index.html` serves at that URL on every static host there is.
+Extensionless serving of `privacy.html` is a per-host behaviour, and this is not a thing to be
+clever about: if these URLs 404, the app ships with three dead links in Settings, which is a
+guideline 2.1 rejection.
+
+## The two files that are not decoration
+
+**`app-ads.txt`** is how advertising networks confirm that whoever is selling advertising
+inside the game is allowed to. It must be served from the root of the domain, as `text/plain`,
+HTTP 200, with no redirect to another domain. Google crawls it by following the **Marketing
+URL** on the App Store listing, so verification cannot even begin until both the listing and
+this site are live. Allow about 24 hours after that. Until it verifies, the game's ad
+inventory is unverified, and most programmatic demand discounts it or refuses to bid.
+
+**It is intentionally incomplete right now.** It holds `OWNERDOMAIN=mutabloom.com` and no
+seller line, because there is no AdMob app for Mutabloom yet and therefore no publisher ID to
+authorise. The real Google line is pasted by a human, from AdMob's own "How to set up
+app-ads.txt" dialog, once the AdMob app exists. Do not type it, do not adapt one from another
+property, and do not guess: a wrong `DIRECT` line authorises a seller that is not used, which
+is worse than a missing one, because it looks verified and is not. Same rule for every network
+added later — paste what that network's dashboard generates, and only once that network is
+genuinely enabled in the shipping build.
+
+**`privacy/index.html`** describes what the game actually does, not what a plan once said it
+might do. AdMob rewarded and interstitial, UMP consent, App Tracking Transparency, Firebase
+Analytics/Crashlytics/Remote Config, StoreKit purchases, Game Center, local notifications,
+Live Activities and their push token, iCloud sync. **If any of that changes, this page changes
+first**, before the build that changes it ships, and the "Last updated" line moves.
+
+## Words that must never appear on this site
+
+Mutabloom is its own game and owes nothing to anybody else's. Naming the thing it will
+inevitably be compared to — in prose, in a comment, in a file name, in an alt attribute — is
+how a clean-room product stops being one, and a public web page is the worst place for it,
+because a web page is what a search engine reads and what a lawyer is shown. The plan document
+in the game repository names a reference title in its market analysis; nothing from that
+analysis belongs on this domain.
+
+The same goes for the owner's other games: this site names none of them and links to none of
+them. Cross-promotion between apps belongs in AdMob house campaigns, not on a legal page.
+
+If a lint script is ever added here to enforce that, it goes in `scripts/`, which `_config.yml`
+already excludes from publishing — read "What this repository publishes" below before adding
+one, because on another property the check written to keep those words off the site was the
+one thing on it publishing them.
+
+## Setting it up
+
+1. **Settings → Pages** in this repository: source `Deploy from a branch`, branch `main`,
+   folder `/ (root)`.
+2. **Settings → Pages → Custom domain**: `mutabloom.com`. GitHub writes a `CNAME` file; one is
+   already committed here, so it should simply agree.
+3. **DNS**, at whoever holds mutabloom.com. An apex domain needs A records rather than a
+   CNAME:
+
+   | Type | Name | Value |
+   |---|---|---|
+   | A | @ | 185.199.108.153 |
+   | A | @ | 185.199.109.153 |
+   | A | @ | 185.199.110.153 |
+   | A | @ | 185.199.111.153 |
+   | AAAA | @ | 2606:50c0:8000::153 |
+   | AAAA | @ | 2606:50c0:8001::153 |
+   | AAAA | @ | 2606:50c0:8002::153 |
+   | AAAA | @ | 2606:50c0:8003::153 |
+   | CNAME | www | therealcreynold.github.io |
+
+   All four A records and all four AAAA records, not one of each: they are GitHub's edge
+   addresses and dropping some of them costs availability rather than breaking the site
+   outright, which is the sort of fault that shows up as an intermittent App Review failure.
+
+4. **Enforce HTTPS**, back in Settings → Pages. GitHub has to issue a certificate first, so the
+   checkbox can take up to 24 hours to become available. Apple will not accept a plain HTTP
+   privacy policy URL.
+
+## Checking it actually works
+
+Once DNS has propagated, all six of these must return 200, and the last must be `text/plain`:
+
+    curl -sSI https://mutabloom.com/
+    curl -sSI https://mutabloom.com/privacy
+    curl -sSI https://mutabloom.com/terms
+    curl -sSI https://mutabloom.com/support
+    curl -sSI https://mutabloom.com/nope          # expect 404, and the styled 404 page
+    curl -sS  https://mutabloom.com/app-ads.txt
+
+Also check that `www` and plain HTTP both land on the canonical HTTPS apex:
+
+    curl -sSI http://mutabloom.com/ | grep -i location
+    curl -sSI https://www.mutabloom.com/ | grep -i location
+
+The privacy, terms and support URLs are linked from the game's Settings screen and are
+compiled into the binary, so all three must serve. Only **two** of them are App Store Connect
+fields, and the third field is not one of these pages at all:
+
+| App Store Connect field | Value |
+|---|---|
+| Privacy Policy URL | `https://mutabloom.com/privacy` |
+| Support URL | `https://mutabloom.com/support` |
+| Marketing URL | `https://mutabloom.com` — the **apex**, not `/terms` and not `/privacy` |
+
+`/terms` goes into no App Store Connect field.
+
+### Why Marketing URL must be the apex
+
+Because that field is not decoration: it is the entry point of the `app-ads.txt` crawl. An ad
+network starts at the store listing, reads the Marketing URL, takes the **domain** of it, and
+fetches `app-ads.txt` from the root of that domain. If Marketing URL is set to
+`https://mutabloom.com/terms`, the crawler is being pointed at a page in a subdirectory, and
+the whole verification depends on the crawler correctly reducing that to the apex rather than
+looking for `https://mutabloom.com/terms/app-ads.txt` — which is a file that does not exist
+here and never will, because `app-ads.txt` is only valid at the root.
+
+Set it to the apex and there is nothing to reduce and nothing to get wrong. Getting this wrong
+does not produce an error anywhere: the pages all still work, the listing looks fine, and
+AdMob verification simply never completes, quietly, while launch week burns.
+
+The same reasoning is why `OWNERDOMAIN` inside `app-ads.txt` is `mutabloom.com` with no
+scheme and no path.
+
+## What this repository publishes
+
+**Only what `_config.yml` allows.** GitHub Pages deploys every file in a repository by
+default, so without that file this site would publish this README along with the four pages.
+`.nojekyll` does not help and cannot: with Jekyll off there is no ignore list at all, so there
+is no way to keep a file in the repository and out of the public directory. Dotfiles are not a
+way round it either — only `.git` is special-cased by GitHub.
+
+That has bitten before, on another property, and badly: a checked-in list of terms that a lint
+script existed to keep *off* the public site was itself served as prose, HTTP 200, on the
+domain the App Store listing pointed at. The exact thing the "Words that must never appear"
+section above exists to prevent, published by the tooling written to prevent it.
+
+So Jekyll is on, and `exclude:` names `README.md` and `scripts`. `scripts` does not exist yet;
+the exclusion is there so that whenever it is created it is already private. Excluding a
+directory that does not exist costs nothing.
+
+Jekyll is safe for these particular files because it renders only files carrying YAML front
+matter, and every page here starts with `<!doctype html>` and has none, so each is copied byte
+for byte. There is no Liquid syntax anywhere in the site, which was verified before the first
+commit and is worth re-verifying after any page is edited.
+
+**Anything added to this repository is public the moment it is pushed unless it is named in
+`_config.yml`. Add it there first.** And after any change to that file, re-check every URL in
+the section above: an excluded page and a broken page look identical from a terminal, and
+three of those URLs are compiled into the shipping app.
+
+## Left for a human, deliberately
+
+- **The Google line in `app-ads.txt`**, pasted from the AdMob dashboard once the AdMob app for
+  Mutabloom exists. Nothing else in this repository should be edited to compensate for its
+  absence.
+- **The App Store link on `index.html`.** There is none, on purpose. The app does not exist,
+  and a fabricated or guessed product URL on the Marketing URL page is both a dead link and a
+  bad look. Add it when the listing is live.
+- **Screenshots and any quote from a player.** Also absent on purpose. There is nothing to
+  screenshot yet and nobody has played it.
+- **The launch-day pass over `privacy/index.html` and `support/index.html`**, checking that
+  every number, cap and behaviour described there matches the build that is actually going to
+  App Review, and moving the "Last updated" dates when it does not.
