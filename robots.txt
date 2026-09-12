@@ -1,0 +1,12 @@
+# mutabloom.com
+#
+# Everything here is meant to be found. Section 10 of the build plan makes organic discovery the
+# entire acquisition strategy -- there is no paid user acquisition -- so nothing on this domain is
+# disallowed, and app-ads.txt in particular MUST stay crawlable: advertising networks reach it by
+# following the App Store listing's Marketing URL, and a Disallow here would quietly break the
+# verification that the whole launch-week ad revenue depends on.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mutabloom.com/sitemap.xml
