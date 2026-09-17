@@ -74,8 +74,13 @@ up where the last device left off. We cannot read that file &mdash; see the
   advanced one rather than silently discarding progress.</li>
   <li>It is not a backup service. If you delete the app and also delete its iCloud data, the
   garden is gone and we cannot recover it, because we never had it.</li>
-  <li>You can turn it off in iOS <strong>Settings &rarr; your name &rarr; iCloud</strong>,
-  and the game will keep the save on the device only.</li>
+  <li><strong>When the two have diverged, the game tells you.</strong> If a garden from
+  another device replaced the one on this phone, Settings inside the game says so and says
+  when &mdash; and a copy of the garden that was replaced is kept on the device.</li>
+  <li>You can turn it off in iOS <strong>Settings &rarr; your name &rarr; iCloud &rarr; Saved
+  to iCloud &rarr; Mutabloom</strong>, and the game will keep the save on the device only.
+  Everything in the game keeps working; the Settings screen inside Mutabloom will tell you
+  sync is off rather than quietly doing nothing.</li>
 </ul>
 
 <h2>Restoring a purchase</h2>
@@ -167,6 +172,9 @@ way you got the gems.</p>
 <p>Deleting the app removes the save on the device. To remove the iCloud copy too, go to iOS
 <strong>Settings &rarr; your name &rarr; iCloud &rarr; Manage Account Storage</strong> and
 delete Mutabloom's data there.</p>
+<p><strong>Delete the app first, then the iCloud data</strong> &mdash; in that order. While
+Mutabloom is still installed it keeps its iCloud copy up to date, so data deleted from
+underneath a running game simply comes back.</p>
 <p>Game Center achievements and leaderboard entries belong to your Game Center account rather
 than to the app, so they survive deleting the game; Apple's Game Center settings are where
 you manage them.</p>
