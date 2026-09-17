@@ -15,7 +15,7 @@ these files are documents Apple and Google hold you to.
 | `support/index.html` | App Store Connect **Support URL**. Also required at submission |
 | `terms/index.html` | Linked from the game's Settings screen. Goes into no App Store Connect field |
 | `404.html` | Served by GitHub Pages for anything else |
-| `app-ads.txt` | Must sit at the domain root, as `text/plain`. Currently holds `OWNERDOMAIN` and nothing else, on purpose — see below |
+| `app-ads.txt` | Must sit at the domain root, as `text/plain`. Holds `OWNERDOMAIN` and Google's seller line — see below |
 | `style.css` | Every page's styles, matching the game's art direction (plan §5.2, §5.4) |
 | `CNAME` | The custom domain, for GitHub Pages |
 | `_config.yml` | The list of things this repository is **not** allowed to publish |
@@ -38,14 +38,14 @@ URL** on the App Store listing, so verification cannot even begin until both the
 this site are live. Allow about 24 hours after that. Until it verifies, the game's ad
 inventory is unverified, and most programmatic demand discounts it or refuses to bid.
 
-**It is intentionally incomplete right now.** It holds `OWNERDOMAIN=mutabloom.com` and no
-seller line, because there is no AdMob app for Mutabloom yet and therefore no publisher ID to
-authorise. The real Google line is pasted by a human, from AdMob's own "How to set up
-app-ads.txt" dialog, once the AdMob app exists. Do not type it, do not adapt one from another
-property, and do not guess: a wrong `DIRECT` line authorises a seller that is not used, which
-is worse than a missing one, because it looks verified and is not. Same rule for every network
-added later — paste what that network's dashboard generates, and only once that network is
-genuinely enabled in the shipping build.
+**It is complete.** Until 2026-09-17 it held `OWNERDOMAIN=mutabloom.com` and no seller line,
+because there was no AdMob app for Mutabloom and so no publisher ID to authorise. Mutabloom was
+added to AdMob that day (app `ca-app-pub-5706069574815967~1321980592`), and the Google line was
+copied from AdMob's own "Set up app-ads.txt" dialog, not typed or adapted from another property.
+It is the same publisher account as cratergut.com. A wrong `DIRECT` line authorises a seller
+that is not used, which is worse than a missing one, because it looks verified and is not. Same
+rule for every network added later — paste what that network's dashboard generates, and only
+once that network is genuinely enabled in the shipping build.
 
 **`privacy/index.html`** describes what the game actually does, not what a plan once said it
 might do. AdMob rewarded and interstitial, UMP consent, App Tracking Transparency, Firebase
@@ -190,9 +190,6 @@ three of those URLs are compiled into the shipping app.
 
 ## Left for a human, deliberately
 
-- **The Google line in `app-ads.txt`**, pasted from the AdMob dashboard once the AdMob app for
-  Mutabloom exists. Nothing else in this repository should be edited to compensate for its
-  absence.
 - **The App Store link on `index.html`.** There is none, on purpose. The app does not exist,
   and a fabricated or guessed product URL on the Marketing URL page is both a dead link and a
   bad look. Add it when the listing is live.

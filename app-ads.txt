@@ -6,17 +6,15 @@
 # lower prices, so this is a launch blocker rather than an optimisation. It is also the single
 # biggest lever on launch-week revenue that is not code.
 #
-# THIS FILE IS DELIBERATELY INCOMPLETE, AND THAT IS THE CORRECT STATE FOR IT TODAY.
+# THIS FILE IS COMPLETE AND READY TO DEPLOY. It held only OWNERDOMAIN until 2026-09-17, because
+# until then no AdMob app existed and so no publisher ID could be authorised. Mutabloom was added
+# to AdMob that day as app ca-app-pub-5706069574815967~1321980592, and the Google line below was
+# copied from AdMob's own "Set up app-ads.txt" dialog rather than typed or adapted from another
+# property. It is the same publisher account as cratergut.com, whose line is identical.
 #
-# The only line here is OWNERDOMAIN. There is no seller line yet because there is no AdMob
-# app yet: Mutabloom has not been created in AdMob, so no publisher ID exists to authorise.
-#
-# THE GOOGLE LINE IS PASTED BY A HUMAN, FROM THE ADMOB DASHBOARD, ONCE THE ADMOB APP EXISTS.
-# AdMob generates it in its own "How to set up app-ads.txt" dialog. Copy it from there and
-# paste it below this comment block. Do not type it, do not adapt one from another property,
-# and do not guess the publisher ID: a wrong DIRECT line authorises a seller that is not used,
-# which is worse than a missing one, because it looks verified and is not, and it is a
-# supply-chain claim that is untrue.
+# Do not type a seller line, and do not guess one: a wrong DIRECT line authorises a seller that
+# is not used, which is worse than a missing one, because it looks verified and is not, and it is
+# a supply-chain claim that is untrue.
 #
 # The same rule holds for every other network. Add a line only when that network is genuinely
 # enabled in the shipping build. Mutabloom v1 runs on Google AdMob alone with no mediation
@@ -33,3 +31,5 @@
 # as the App Store Connect Marketing URL, because that link is the path every crawler walks
 # to get here. For Mutabloom that is the apex, https://mutabloom.com -- not a sub-path.
 OWNERDOMAIN=mutabloom.com
+
+google.com, pub-5706069574815967, DIRECT, f08c47fec0942fa0
