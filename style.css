@@ -236,7 +236,10 @@ footer p { margin: 14px 0 0; }
 .shots {
   display: grid;
   gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /* 200px, not 150: the wrap is 880 wide, so 150 fits FIVE across and leaves a single orphan
+     on a second row, which looks like a mistake. 200 gives a clean three-by-two on desktop and
+     falls to two-up then one-up on a phone without a media query. */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
