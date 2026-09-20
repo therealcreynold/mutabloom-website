@@ -236,10 +236,14 @@ footer p { margin: 14px 0 0; }
 .shots {
   display: grid;
   gap: 14px;
-  /* 200px, not 150: the wrap is 880 wide, so 150 fits FIVE across and leaves a single orphan
-     on a second row, which looks like a mistake. 200 gives a clean three-by-two on desktop and
-     falls to two-up then one-up on a phone without a media query. */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* THE TRACK MINIMUM IS THE SMALLER OF 200px AND 45% OF THE ROW, and both halves earn their
+     place. A flat 150px fits FIVE across the 880px wrap and orphans the sixth, which reads as a
+     mistake; a flat 200px fixes that but collapses a phone to ONE column, and one column of a
+     portrait screenshot is 840px tall, so the six of them become five thousand pixels of
+     scrolling. The 45% floor holds phones at TWO columns instead. Six divides evenly by two and
+     by three, so no width produces an orphan row. Measured: 2-up from 320 to 600, 3-up from 768
+     on, and no horizontal overflow at any of them. */
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 45%), 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
