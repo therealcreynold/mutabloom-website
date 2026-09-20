@@ -190,11 +190,41 @@ three of those URLs are compiled into the shipping app.
 
 ## Left for a human, deliberately
 
-- **The App Store link on `index.html`.** There is none, on purpose. The app does not exist,
-  and a fabricated or guessed product URL on the Marketing URL page is both a dead link and a
-  bad look. Add it when the listing is live.
-- **Screenshots and any quote from a player.** Also absent on purpose. There is nothing to
-  screenshot yet and nobody has played it.
-- **The launch-day pass over `privacy/index.html` and `support/index.html`**, checking that
-  every number, cap and behaviour described there matches the build that is actually going to
-  App Review, and moving the "Last updated" dates when it does not.
+- **The App Store link on `index.html`.** There is none, on purpose. As of 2026-09-20 the app
+  is *submitted and waiting for review*, which is not the same as live, and a product URL that
+  404s on the Marketing URL page is both a dead link and a bad look. Add it the day the listing
+  goes live. The hero note and the "Coming soon" section both say "waiting for review" and both
+  have to change at the same moment.
+- **Any quote from a player.** Still absent on purpose: nobody outside has played it.
+
+## The launch-day pass, done 2026-09-20
+
+The third item that used to sit in the list above. All three "Last updated" dates moved to
+20 September in the same commit as the corrections, which is the only honest way to move them:
+a fresh date over stale prose asserts a re-read that did not happen.
+
+**What it found is why the pass exists.** The pages were written on 12 September against the
+plan, and the build had moved:
+
+- **The privacy policy described a server that does not exist.** It said the only infrastructure
+  the developer runs is a push-token service for Live Activities, and described what that
+  service stores. There is no such service and there never was: the app contains no
+  `URLSession`, no push token and no network call of its own, and the Live Activity is drawn on
+  the device from the local save. Corrected to say there is no back end at all, which is both
+  true and a stronger claim.
+- **It described the pre-decision-14 advertising posture**, promising non-personalised adverts
+  to everyone who declines consent, and never saying what happens to somebody who *allows*
+  tracking — while the published App Store privacy label declares Device ID and Advertising
+  Data as used to track you. Disclosing less than the label is the dangerous direction.
+- **Both it and the terms page sold a Gardener's Pass subscription.** 1.0 sells eleven in-app
+  purchases and no subscription of any kind.
+- **The support page had six factual errors**, including the offline cap (it caps the whole
+  garden, not only pets), which harvests keep a streak alive (a pet's do not), and switches for
+  haptics and motion that the game does not have.
+- **`app-ads.txt` named another of the owner's properties in a comment.** That file is served
+  from the root as `text/plain` and ad networks are guaranteed to fetch it, which makes it the
+  worst place on the domain to break the rule above — and the same shape as the cautionary tale
+  in "What this repository publishes".
+
+The lesson for the next pass: read the pages against the code, not against the plan. Every one
+of those claims was true of the design at some point.

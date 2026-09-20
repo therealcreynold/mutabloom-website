@@ -9,8 +9,17 @@
 # THIS FILE IS COMPLETE AND READY TO DEPLOY. It held only OWNERDOMAIN until 2026-09-17, because
 # until then no AdMob app existed and so no publisher ID could be authorised. Mutabloom was added
 # to AdMob that day as app ca-app-pub-5706069574815967~1321980592, and the Google line below was
-# copied from AdMob's own "Set up app-ads.txt" dialog rather than typed or adapted from another
-# property. It is the same publisher account as cratergut.com, whose line is identical.
+# copied from AdMob's own "Set up app-ads.txt" dialog rather than typed or adapted from anywhere
+# else.
+#
+# A NAME WAS REMOVED FROM THIS COMMENT ON 2026-09-20 and it is worth saying why, because the
+# temptation to put it back is real. The line used to note which other property of the publisher
+# shares this account. README.md forbids naming the owner's other games anywhere on this domain,
+# and this file is the worst possible place to break that rule: it is served from the root as
+# text/plain, HTTP 200, and ad networks are guaranteed to fetch it. README.md's own cautionary
+# tale is this exact shape -- on another property, the checked-in list of words a lint existed to
+# keep off the site was itself published as prose on the domain the store listing pointed at.
+# A comment in a crawled file is public writing.
 #
 # Do not type a seller line, and do not guess one: a wrong DIRECT line authorises a seller that
 # is not used, which is worse than a missing one, because it looks verified and is not, and it is

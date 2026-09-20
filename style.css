@@ -221,3 +221,34 @@ footer p { margin: 14px 0 0; }
   }
   .card:hover { transform: none; }
 }
+
+/* THE SCREENSHOT STRIP, added 2026-09-20 once there was a real game to photograph.
+   README.md had listed screenshots under "left for a human, deliberately" on the grounds that
+   nothing existed to shoot; six frames now do, captured from the build that went to App Review.
+
+   These are the RAW captures rather than the captioned store versions on purpose: the store
+   images carry their own headline and a drawn device frame, and both would fight the page's own
+   prose and the frame below. Scaled to 640px and saved as JPEG, the whole set is about 200KB --
+   the full-size PNGs are 13MB, which is not a landing page.
+
+   auto-fit rather than a fixed column count so it reflows from six-up to one-up without a media
+   query, and the aspect-ratio keeps the row from jumping while the images decode. */
+.shots {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1320 / 2868;
+  object-fit: cover;
+  border: 1px solid var(--card-line);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}

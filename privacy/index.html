@@ -53,13 +53,17 @@
 
 <main class="doc wrap narrow">
 <h1>Mutabloom privacy policy</h1>
-<p class="updated">Last updated: 12 September 2026</p>
+<p class="updated">Last updated: 20 September 2026</p>
 
 <div class="callout">
   <p><strong>The short version.</strong> Mutabloom has no account, no login and no server of
-  ours holding your garden. Your save lives on your device, and in your own iCloud if you
-  leave sync on. What does leave your device is advertising and diagnostic data collected by
-  Google, purchases handled by Apple, and whatever Game Center you choose to sign in to.</p>
+  ours at all. Your save lives on your device, and in your own iCloud if you leave sync on.
+  What does leave your device is advertising and diagnostic data collected by Google,
+  purchases handled by Apple, and whatever Game Center you choose to sign in to.</p>
+  <p>Mutabloom asks two permission questions, and one of them is about tracking. If you allow
+  it, Google may use your device's advertising identifier to choose adverts based on what you
+  do in other apps and on websites. If you decline, you still get every advert and every
+  reward, chosen without it. Both answers are changeable at any time.</p>
   <p>Mutabloom is <strong>not a children's app</strong>. It is made for adults, it is not in
   the Kids Category, and it is not directed to children.</p>
 </div>
@@ -70,9 +74,10 @@ and your purchase entitlements are held in a file in Mutabloom's own storage on 
 There is no Mutabloom account to create, nothing to sign up for, and no field anywhere in the
 game where you type something that is sent to us. Delete the app and that file goes with
 it.</p>
-<p>We do not run a server that holds your game. The only piece of infrastructure we operate
-is described under <a href="#live-activities">Live Activities</a> below, and it holds no
-game data at all.</p>
+<p>We do not run a server. There is no Mutabloom back end of any kind and the app never
+contacts anything of ours &mdash; not to sync, not to log, not to check a licence. The only
+companies Mutabloom talks to are Google and Apple, and everything either of them receives is
+described below.</p>
 
 <h2>Advertising</h2>
 <p>Mutabloom is free, and advertising is what pays for it. There is exactly one advertising
@@ -105,8 +110,7 @@ no second network. If that ever changes, this page changes before the change shi
 <a href="https://policies.google.com/privacy">Google's privacy policy</a> and
 <a href="https://policies.google.com/technologies/partner-sites">how Google uses information
 from apps that use its services</a>.</p>
-<p>Buying <strong>Remove Ads</strong>, or holding an active Gardener's Pass, stops every
-interstitial permanently. It deliberately does <em>not</em> remove the rewarded adverts,
+<p>Buying <strong>Remove Ads</strong> stops every interstitial permanently. It deliberately does <em>not</em> remove the rewarded adverts,
 because those are rewards rather than interruptions and removing them would remove things you
 paid nothing for and lose nothing by keeping. While you still have rewarded adverts
 available, the advertising software still starts, and this section still applies to you.</p>
@@ -122,6 +126,12 @@ answer.</p>
 without the device advertising identifier, which usually means they are less relevant and pay
 us less. You can change the answer at any time in iOS <strong>Settings &rarr; Privacy &amp;
 Security &rarr; Tracking</strong>.</p>
+<p>Say yes and Google may use your device's advertising identifier to link what you do in
+Mutabloom with what you do in other apps and on websites, so that the adverts you are shown
+&mdash; here and elsewhere &mdash; are chosen for you. That is exactly what Apple means by
+tracking, and it is why Mutabloom's App Store listing declares <strong>Device ID</strong> and
+<strong>Advertising Data</strong> as used to track you. Nothing else changes: the game, the
+rewards and the prices are identical either way.</p>
 
 <h3>Consent in the European Economic Area and the United Kingdom</h3>
 <p>Where the ePrivacy rules and the GDPR require consent before adverts are personalised or
@@ -129,15 +139,23 @@ before anything is stored on your device for advertising, Mutabloom shows Google
 form &mdash; the UMP consent form &mdash; before it requests a single advert. The choices you
 make there are yours to change afterwards: the game has a standing
 <strong>Settings &rarr; Privacy Options</strong> row that reopens the same form.</p>
-<p>If you refuse consent, the game still works in full. You get non-personalised adverts,
-which pay less and are otherwise identical to watch.</p>
+<p>If you refuse consent the game still works in full, and you still get every advert and
+every reward. Google serves its limited adverts instead: chosen without anything being stored
+on or read from your device for advertising, and without the advertising identifier. They pay
+us less and are otherwise identical to watch. If you consent here <em>and</em> separately
+allow tracking at Apple's prompt, the adverts you see are personalised.</p>
+<p>If you decline this form, Mutabloom does not go on to show you Apple's tracking prompt at
+all. Asking to track somebody who has just said no would be both rude and against Apple's
+rules. That also means Mutabloom will not appear under iOS <strong>Settings &rarr; Privacy
+&amp; Security &rarr; Tracking</strong> &mdash; reopen the <strong>Privacy options</strong>
+row in the game if you change your mind.</p>
 
 <h3>United States state privacy laws</h3>
-<p>There is no prompt at launch in the US states with their own privacy laws, and that is
-deliberate rather than missing: those laws are opt-out rather than opt-in. The control is
-standing instead, in the same <strong>Settings &rarr; Privacy Options</strong> row, and that
-is where you say no to the sale or sharing of personal information for targeted
-advertising.</p>
+<p>Apple's tracking prompt above is shown in the United States like everywhere else. What the
+US state privacy laws additionally require is an opt-out rather than an opt-in, so there is no
+second prompt: the control is standing instead, in the same <strong>Settings &rarr; Privacy
+Options</strong> row, and that is where you say no to the sale or sharing of personal
+information for targeted advertising.</p>
 
 <h3>Notifications</h3>
 <p>Mutabloom asks for notification permission when it first has something worth telling you,
@@ -157,13 +175,17 @@ data rather than personal profiles:</p>
   not to your name, your email or your Apple Account. Deleting and reinstalling the app
   resets it.</li>
   <li><strong>Firebase Crashlytics</strong> collects crash reports: what the app was doing
-  when it fell over, the device model and OS version, and a stack trace. It is the only way a
-  crash that happens to you gets fixed for you.</li>
-  <li><strong>Firebase Remote Config</strong> is how the game's numbers and events are tuned
-  without an app update &mdash; advert caps, festival calendars, prices in gems. It sends
-  configuration <em>to</em> your device; it collects nothing about you beyond what is needed
-  to deliver the right configuration.</li>
+  when it fell over, the device model and OS version, and a stack trace, along with
+  performance data such as how long the app took to start and where it stalled. It is the only
+  way a crash that happens to you gets fixed for you.</li>
+  <li><strong>Firebase Remote Config</strong> is built into the app so that advert caps and
+  event timings can be adjusted in a later version without shipping a whole new build.
+  <strong>Version 1.0 fetches no configuration at all</strong> &mdash; every number the game
+  uses is compiled into it &mdash; and this page will say so differently before a version that
+  does.</li>
 </ul>
+<p>Some of that diagnostic data is also used by Google to measure and improve advertising. It
+is not linked to your identity.</p>
 <p>Google's handling of all three is governed by the
 <a href="https://firebase.google.com/support/privacy">Firebase privacy and security
 policy</a>.</p>
@@ -173,8 +195,8 @@ policy</a>.</p>
 your payment details.</strong> No card number, no billing address, and not the email address
 of your Apple Account, ever reaches us or the app.</p>
 <p>What the app reads is the list of entitlements Apple says your Apple Account holds &mdash;
-whether Remove Ads is owned, whether a Gardener's Pass is currently active &mdash; which is
-also what makes Restore Purchases work on your other devices. Refunds are handled by Apple at
+whether Remove Ads is owned, whether the Golden Trowel, an extra plot row or an extra pet slot
+were bought &mdash; which is also what makes Restore Purchases work on your other devices. Refunds are handled by Apple at
 <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>, not by us.</p>
 
 <h2>Game Center</h2>
@@ -192,23 +214,18 @@ sent to another player.</p>
 <p>You can put your garden on the Lock Screen and in the Dynamic Island: growth timers, the
 weather countdown, a harvest-ready count, buttons that water, catch weather or harvest. This
 is off until you turn it on inside the game.</p>
-<p>Turning it on has one privacy consequence, and it is the only piece of server
-infrastructure Mutabloom has. A worldwide weather event has to flip every player's Live
-Activity to raining at the same moment, and a plant that finishes growing while your phone is
-in your pocket has to be able to say so. Both need Apple's push service, so:</p>
-<ul>
-  <li>Apple issues an anonymous push token for that Live Activity, and the app sends it to a
-  small service we run. That service stores the token, the broadcast channel it is subscribed
-  to, and a timestamp. <strong>No account, no device name, no location, no game
-  data.</strong></li>
-  <li>The pushes it sends are game state: the weather that is starting, the plant that is
-  ready. Nothing in a Live Activity is advertising, and Apple's rules do not allow it to
-  be.</li>
-  <li>Live Activity tokens expire on their own, and ending a Live Activity or turning the
-  feature off in the game invalidates the token immediately.</li>
-</ul>
+<p><strong>Turning it on sends nothing anywhere.</strong> The activity is drawn by Mutabloom on
+your own device from your own save, it is updated by the app while the app is running, and
+nothing about it involves a push token or a server of ours. There is no network request. Every
+number on it &mdash; the growth timer, the weather countdown, the harvest-ready count &mdash;
+came off your phone.</p>
+<p>One consequence of that is worth knowing, because it looks like a fault and is not: since
+the update has to come from the app, an activity can only start while Mutabloom is open, and a
+weather event that begins while the game is closed will not appear on your Lock Screen until
+you next open it.</p>
 <p>The buttons inside a Live Activity run inside Mutabloom on your device. Pressing
-<em>Catch</em> during a rainstorm changes your save; it does not send us anything.</p>
+<em>Catch</em> during a rainstorm changes your save; it does not send us anything. Nothing in a
+Live Activity is advertising, and Apple's rules do not allow it to be.</p>
 
 <h2>iCloud save sync</h2>
 <p>If you are signed in to iCloud and have iCloud Drive on, Mutabloom keeps a copy of your
@@ -234,8 +251,7 @@ information, write to the address at the bottom of this page and we will delete 
 <ul>
   <li><strong>Google</strong> &mdash; AdMob advertising, Firebase Analytics, Crashlytics and
   Remote Config. <a href="https://policies.google.com/privacy">Privacy policy</a>.</li>
-  <li><strong>Apple</strong> &mdash; the App Store, purchases, Game Center, push notifications
-  for Live Activities, and iCloud sync.
+  <li><strong>Apple</strong> &mdash; the App Store, purchases, Game Center and iCloud sync.
   <a href="https://www.apple.com/legal/privacy/">Privacy policy</a>.</li>
 </ul>
 <p>That is the complete list. Mutabloom contains no other analytics, no attribution SDK, no
